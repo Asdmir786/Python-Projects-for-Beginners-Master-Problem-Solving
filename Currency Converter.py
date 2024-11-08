@@ -81,11 +81,20 @@ def CurrencyConverter(SOURCE_AMMOUNT, SOURCE_CURRENCY, TARGET_CURRENCY):
         # Correct conversion formula
     converted_amount = SOURCE_AMMOUNT * (rates[TARGET_CURRENCY] / rates[SOURCE_CURRENCY])
     print(f"{SOURCE_AMMOUNT} {SOURCE_CURRENCY} is equal to {converted_amount} {TARGET_CURRENCY}.")
+    with open("History Of Currency Exchanges.txt","a") as writer:
+        writer.write(f"\n{SOURCE_AMMOUNT} {SOURCE_CURRENCY} is equal to {converted_amount} {TARGET_CURRENCY}.\n<-------------------->\n")
+        writer.close()
         
 def AllCurrencyConverter(SOURCE_AMOUNT,SOURCE_CURRENCY):
     for keys,value in rates.items():
         converted_amount = SOURCE_AMOUNT * (value/rates[SOURCE_CURRENCY])
         print(f"{SOURCE_AMOUNT} {SOURCE_CURRENCY} is equal to {converted_amount} {keys}.")
+        with open("History Of Currency Exchanges.txt","a") as writer:
+            writer.write(f"\n{SOURCE_AMOUNT} {SOURCE_CURRENCY} is equal to {converted_amount} {keys}.\n")
+    with open("History Of Currency Exchanges.txt","a") as writer:
+        writer.write("<-------------------->\n")
+        
+    
 
 def SingleCurrencyConversion():
     while True:
@@ -114,7 +123,3 @@ while True:
         MultiCurrencyConversion()
         break
     else: print("Enter 'multi' or 'm' or 's' or 'single' ")
-    
-
-with open("History Of Currency Exchanges.txt","w") as writer:
-    pass
